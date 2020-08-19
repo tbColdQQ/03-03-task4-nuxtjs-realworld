@@ -53,11 +53,11 @@
               }
             }">{{article.author.username}}}</nuxt-link>
               <!-- <a href="" class="author">Eric Simons</a> -->
-              <span class="date">{{article.createdAt}}</span>
+              <span class="date">{{article.createdAt | date('MMM DD, YYYY')}}</span>
             </div>
             <button class="btn btn-outline-primary btn-sm pull-xs-right" :class="{
               active: article.favorited
-            }">
+            }" @click="onFavorite(article)" :disabled="article.favoriteDisabled">
               <i class="ion-heart"></i> {{article.favoritesCount}}
             </button>
           </div>
@@ -107,7 +107,7 @@
 </template>
 
 <script>
-  import { getArticles, getYourFeedArticles } from '@/api/article'
+  import { getArticles, getYourFeedArticles, addFavorite, deleteFavorite } from '@/api/article'
   import { getTags } from '@/api/tag'
   import { mapState } from 'vuex'
   export default {
@@ -130,6 +130,8 @@
       const { articles, articlesCount} = articleRes.data
       const { tags } = tagRes.data
 
+      articles.forEach(article => article.favoriteDisabled = false)
+
       return {
         articles,
         articlesCount,
@@ -146,6 +148,23 @@
         return Math.ceil(this.articlesCount / this.limit)
       },
       ...mapState(['user'])
+    },
+
+    methods: {
+      async onFavorite (article) {
+        article.favoriteDisabled = true
+        console.log(article)
+        if(article.favorited) {
+          await deleteFavorite(article.slug)
+          article.favorited = false
+          article.favoritesCount += -1
+        }else {
+          await addFavorite(article.slug)
+          article.favorited = true
+          article.favoritesCount += 1
+        }
+        article.favoriteDisabled = false
+      }
     }
   }
 </script>

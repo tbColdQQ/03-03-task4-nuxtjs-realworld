@@ -6,7 +6,7 @@
  * @LastEditors: jie.niu
  * @LastEditTime: 2020-08-18 16:01:39
  */
-import request from '@/utils/request'
+import { request } from '@/plugins/request'
 
 export const login = data => {
   return request({
