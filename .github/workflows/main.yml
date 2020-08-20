@@ -40,16 +40,16 @@ jobs:
         asset_content_type: application/x-tgz
     # 部署到服务器
     - name: Deploy
-    uses: appleboy/ssh-action@master
-    with:
-      host: ${{ secrets.HOST }}
-      username: ${{ secrets.USERNAME }}
-      password: ${{ secrets.PASSWORD }}
-      port: ${{ secrets.PORT }}
-      script: |
-        cd /root/projects/03-03-task4-nuxtjs-realworld
-        wget https://github.com/tbColdQQ/03-03-task4-nuxtjs-realworld/releases/latest/download/release.tgz -O release.tgz
-        tar zxvf release.tgz
-        # npm install --production
-        yarn install --production
-        pm2 reload pm2.config.json
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd /root/projects/03-03-task4-nuxtjs-realworld
+          wget https://github.com/tbColdQQ/03-03-task4-nuxtjs-realworld/releases/latest/download/release.tgz -O release.tgz
+          tar zxvf release.tgz
+          # npm install --production
+          yarn install --production
+          pm2 reload pm2.config.json
