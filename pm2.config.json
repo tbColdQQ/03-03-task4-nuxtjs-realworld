@@ -1,6 +1,11 @@
 {
   "apps": [
     {
+      "name": "yarn-i",
+      "script": "yarn",
+      "args": "install"
+    },
+    {
       "name": "RealWorld",
       "script": "yarn",
       "args": "start"
