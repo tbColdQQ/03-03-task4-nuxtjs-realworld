@@ -56,5 +56,5 @@ jobs:
           cd /root/projects/03-03-task4-nuxtjs-realworld
           wget https://github.com/tbColdQQ/03-03-task4-nuxtjs-realworld/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz
-          npm install --production
+          yarn install --production
           pm2 reload pm2.config.json
