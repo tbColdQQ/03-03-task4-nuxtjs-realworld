@@ -51,7 +51,7 @@
               params: {
                 username: article.author.username
               }
-            }">{{article.author.username}}}</nuxt-link>
+            }">{{article.author.username}}</nuxt-link>
               <!-- <a href="" class="author">Eric Simons</a> -->
               <span class="date">{{article.createdAt | date('MMM DD, YYYY')}}</span>
             </div>
@@ -117,7 +117,8 @@
       const limit = 20
       const tab = query.tab || 'global_feed'
       const tag = query.tag
-      const loadArticles = tab === 'global_feed' ? getArticles : getYourFeedArticles
+      console.log('query--->', query, tab, tag)
+      const loadArticles = tab === 'global_feed' ? getArticles : tab === 'tag' ? getArticles : getYourFeedArticles
       const [ articleRes, tagRes ] = await Promise.all([
         loadArticles({
           limit,

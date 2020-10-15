@@ -1,11 +1,11 @@
 <template>
   <div>
-    <form class="card comment-form">
+    <form class="card comment-form" @submit.prevent="onSubmit">
       <div class="card-block">
-        <textarea class="form-control" placeholder="Write a comment..." rows="3"></textarea>
+        <textarea class="form-control" v-model="content" placeholder="Write a comment..." rows="3"></textarea>
       </div>
       <div class="card-footer">
-        <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
+        <img :src="user.image" class="comment-author-img" />
         <button class="btn btn-sm btn-primary">
           Post Comment
         </button>
@@ -29,12 +29,17 @@
 </template>
 
 <script>
-  import { getComments } from '@/api/article'
+  import { getComments, addComment } from '@/api/article'
+  import { mapState } from 'vuex'
   export default {
     name: 'ArticleComments',
+    computed: {
+      ...mapState(['user'])
+    },
     data () {
       return {
-        comments: []
+        comments: [],
+        content: ''
       }
     },
     props: {
@@ -46,6 +51,13 @@
     async mounted () {
       const { data } = await getComments(this.article.slug)
       this.comments = data.comments
+    },
+    methods: {
+      async onSubmit () {
+        const { data } = await addComment(this.article.slug, this.content)
+        this.comments.push(data.comment)
+        this.content = ''
+      }
     }
   }
 </script>

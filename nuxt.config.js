@@ -37,6 +37,11 @@ module.exports = {
 							component: resolve(__dirname, 'pages/profile/')
             },
             {
+							path: '/profile/:username/favourites',
+							name: 'favprofile',
+							component: resolve(__dirname, 'pages/profile/')
+            },
+            {
 							path: '/settings',
 							name: 'settings',
 							component: resolve(__dirname, 'pages/settings/')
@@ -44,6 +49,11 @@ module.exports = {
             {
 							path: '/editor',
 							name: 'editor',
+							component: resolve(__dirname, 'pages/editor/')
+            },
+            {
+							path: '/editor/:slug',
+							name: 'editEditor',
 							component: resolve(__dirname, 'pages/editor/')
             },
             {

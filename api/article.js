@@ -51,3 +51,34 @@ export const getComments = slug => {
     url: `/api/articles/${slug}/comments`
   })
 }
+
+export const createArticle = article => {
+  return request({
+    method: 'POST',
+    url: `/api/articles`,
+    data: {article}
+  })
+}
+
+export const addComment = (slug, content) => {
+  return request({
+    method: 'POST',
+    url: `/api/articles/${slug}/comments`,
+    data: {comment: {body: content}}
+  })
+}
+
+export const deleteArticle = slug => {
+  return request({
+    method: 'DELETE',
+    url: `/api/articles/${slug}`
+  })
+}
+
+export const updateArticle = article => {
+  return request({
+    method: 'PUT',
+    url: `/api/articles/${article.slug}`,
+    data: {article}
+  })
+}
