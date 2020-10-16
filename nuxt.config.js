@@ -8,7 +8,7 @@
  */
 module.exports = {
 	router: {
-    base: '/',
+    base: '/t03-03-task4-nuxtjs-realworld',
     linkActiveClass: 'active',
 		extendRoutes (routes, resolve) {
 			routes.splice(0)
