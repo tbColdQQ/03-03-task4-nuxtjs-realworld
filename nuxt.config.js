@@ -8,6 +8,7 @@
  */
 module.exports = {
 	router: {
+    base: '/',
     linkActiveClass: 'active',
 		extendRoutes (routes, resolve) {
 			routes.splice(0)
